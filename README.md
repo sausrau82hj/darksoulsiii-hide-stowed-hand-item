@@ -25,7 +25,7 @@ Make a `chr` folder with the patched models — from the models pack, or patched
   point the loader at it: [me](https://www.nexusmods.com/darksouls3/mods/2410),
   [me2](https://github.com/soulsmods/ModEngine2) or [me3](https://github.com/garyttierney/me3). `xinput1_3.dll` is
   not needed here: the loader injects `hidestowed.dll` itself.
-- **The loader only loads the `chr` files** — then the core is loaded by the shell: copy `hidestowed.dll`,
+- **If you only want the loader to load the model files** — the core is loaded by the shell: copy `hidestowed.dll`,
   `hidestowed.ini` and `xinput1_3.dll` into the game folder, and point the loader at the `chr` folder.
 
 Without a loader, those same three files go into the game folder and the patched models into `Game\chr`.
