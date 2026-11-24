@@ -18,15 +18,22 @@ read models that carry them.
 
 ## Install
 
-1. Make one mod folder holding `hidestowed.dll`, `hidestowed.ini` and a `chr` folder with the patched models —
-   from the models pack, or patched by you, see [Patched models](#patched-models).
-2. Point the loader at that folder: [me](https://www.nexusmods.com/darksouls3/mods/2410),
-   [me2](https://github.com/soulsmods/ModEngine2) or [me3](https://github.com/garyttierney/me3).
+Make a `chr` folder with the patched models — from the models pack, or patched by you, see
+[Patched models](#patched-models). Then load the mod core and let the game read that folder. Two ways:
 
-Without a loader, copy `hidestowed.dll`, `hidestowed.ini` and `xinput1_3.dll` into the game folder instead.
-`xinput1_3.dll` stands in for the system XInput library: it forwards every XInput call to the real DLL, so
-controllers keep working, and then loads `hidestowed.dll`. Only one `xinput1_3.dll` fits in a folder, so rename
-another mod's copy first if there is one.
+- **The loader loads the core DLL** — one mod folder holding `hidestowed.dll`, `hidestowed.ini` and the `chr` folder;
+  point the loader at it: [me](https://www.nexusmods.com/darksouls3/mods/2410),
+  [me2](https://github.com/soulsmods/ModEngine2) or [me3](https://github.com/garyttierney/me3). `xinput1_3.dll` is
+  not needed here: the loader injects `hidestowed.dll` itself.
+- **The loader only overrides files** — it can serve the `chr` folder but cannot inject a DLL. Then the core is loaded
+  by the shell: copy `hidestowed.dll`, `hidestowed.ini` and `xinput1_3.dll` into the game folder, and point the
+  loader at the `chr` folder.
+
+`xinput1_3.dll` stands in for the system XInput library: the game loads it from its own folder, it forwards every
+XInput call to the real DLL — controllers keep working — and then loads `hidestowed.dll`. Anywhere else it is never
+loaded, and only one `xinput1_3.dll` fits in a folder, so rename another mod's copy first if there is one.
+
+Without a loader, those same three files go into the game folder and the patched models into `Game\chr`.
 
 ## Uninstall
 
@@ -92,11 +99,16 @@ assembly is committed in `tools\` as `ds3tae.dll` with its `.deps.json` and `.ru
 
 ### Patched models
 
-Both ways end with a `chr` folder whose `*.chrbnd.dcx` all carry dummies 382 and 383:
+Both ways end with a `chr` folder whose `*.chrbnd.dcx` all carry dummies 382 and 383.
 
-- **Prepared pack** — download `ds3-hshi-chr-models-v1.0.0.zip` and use its `chr` folder.
-- **Your own models** — copy `ds3tae.dll`, `ds3tae.deps.json`, `ds3tae.runtimeconfig.json` and `SoulsFormats.dll`
-  out of `tools\` (or build them as above) and run:
+The bundles are not loose files — they sit inside `Data1-5` — so patching your own models means unpacking the game
+first, with UXM or [Nuxe](https://github.com/JKAnderson/Nuxe) (its successor). Nothing else reaches the
+`chrbnd.dcx` files; a loader only serves the folder once it exists.
+
+- **Prepared pack** — download `ds3-hshi-chr-models-v1.0.0.zip` and use its `chr` folder; no unpacking, the pack is
+  drop-in.
+- **Your own models** — unpack the game, then copy `ds3tae.dll`, `ds3tae.deps.json`, `ds3tae.runtimeconfig.json` and
+  `SoulsFormats.dll` out of `tools\` (or build them as above) and run:
 
   ```
   dotnet ds3tae.dll parkdir "<chr>" INPLACE "382,383" "0,-1000,0" 0 "chrbnd"
