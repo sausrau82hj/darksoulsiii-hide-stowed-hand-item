@@ -51,21 +51,6 @@ changes and the game needs no unpacking.
 2. Point the loader at that folder: [me](https://www.nexusmods.com/darksouls3/mods/2410),
    [me2](https://github.com/soulsmods/ModEngine2) or [me3](https://github.com/garyttierney/me3).
 
-### Repairing the models
-
-Black triangles or flicker on one character mean that bundle lost dummies 382/383 — another model mod overwrote it, or
-`chr\` was restored only in part. `tools\ds3tae.dll` is the same build as the release asset (needs the .NET 10
-runtime); from the repository root:
-
-```
-dotnet tools\ds3tae.dll verify  "<chr>" chrbnd "382,383"
-dotnet tools\ds3tae.dll parkdir "<chr>" INPLACE "382,383" "0,-1000,0" 0 "chrbnd"
-dotnet tools\ds3tae.dll verify  "<chr>" chrbnd "382,383"
-```
-
-`parkdir` touches only the bundles that lack the dummies, so running it twice is safe; afterwards `verify` must report
-the same number of scanned files and files carrying 382,383.
-
 ## Uninstall
 
 - **Route 2** — remove the mod folder from the loader profile.
@@ -159,7 +144,6 @@ tools\ds3tae.dll + .deps.json  the patcher assembly, same build as the release a
 tools\SoulsFormats.dll        the reference the validator build needs
 docs\MANUAL-INSTALL.txt       longer walkthrough with troubleshooting
 LICENSE, THIRD-PARTY-NOTICES  licenses, and what is not MIT
-CHANGELOG.md                  release notes
 ```
 
 ## License
