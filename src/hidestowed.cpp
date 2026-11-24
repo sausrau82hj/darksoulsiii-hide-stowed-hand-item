@@ -1,4 +1,4 @@
-// hidestowed - Dark Souls III 1.15.0 (Steam, 64-bit).
+// hidestowed - Dark Souls III (Steam, 64-bit).
 // Points the WepAbsorpPosParam sheathed and off-hand model fields at a parking dummy.
 
 #define WIN32_LEAN_AND_MEAN

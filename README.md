@@ -18,11 +18,6 @@ read models that carry them.
 
 ## Requirements
 
-- [Dark Souls III](https://store.steampowered.com/app/374320/) on Steam, patch **1.15.0**, 64-bit. The offsets are
-  1.15.0's and nothing checks the version at run time, so a newer patch means a mod that does nothing rather than an
-  error message.
-- Windows 10/11 x64. Both DLLs are native PE32+ and import only `KERNEL32.dll`: no Visual C++ redistributable, no
-  .NET, no admin rights, no network, no files written.
 - [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0), 64-bit, only for `ds3tae` (patching your own
   models). The prepared models pack needs no tool.
 - A mod loader is optional; without one the `xinput1_3.dll` shell loads the core — see Install.
