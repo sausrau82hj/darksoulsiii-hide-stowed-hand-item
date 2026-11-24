@@ -16,6 +16,15 @@ read models that carry them.
 | `ds3-hshi-v1.0.0.zip` | `hidestowed.dll`, `hidestowed.ini`, `xinput1_3.dll`, `LICENSE`, `THIRD-PARTY-NOTICES.txt` — 185 KB |
 | `ds3-hshi-chr-models-v1.0.0.zip` | 165 patched `chr\*.chrbnd.dcx` — 342 MB |
 
+## Requirements
+
+- Dark Souls III on Steam, patch **1.15.0**, 64-bit. The offsets are 1.15.0's and nothing checks the version at run
+  time, so a newer patch means a mod that does nothing rather than an error message.
+- Windows 10/11 x64. Both DLLs are native PE32+ and import only `KERNEL32.dll`: no Visual C++ redistributable, no
+  .NET, no admin rights, no network, no files written.
+- `.NET 10 runtime`, 64-bit, only for `ds3tae` (patching your own models). The prepared models pack needs no tool.
+- A mod loader is optional; without one the `xinput1_3.dll` shell loads the core — see Install.
+
 ## Install
 
 Make a `chr` folder with the patched models — from the models pack, or patched by you, see
@@ -88,9 +97,9 @@ cl /nologo /O2 /EHsc /std:c++17 /DNDEBUG /LD src\xinput1_3_proxy.cpp /Fe:xinput1
 dotnet build validator\validator.csproj
 ```
 
-`dotnet build` writes `ds3tae.exe` and `ds3tae.dll` into `validator\bin\…` and needs the .NET 10 runtime. The same
-assembly is committed in `tools\` as `ds3tae.dll` with its `.deps.json` and `.runtimeconfig.json`, next to the
-`SoulsFormats.dll` it links, so `dotnet ds3tae.dll` works without building anything.
+`dotnet build` writes `ds3tae.exe` and `ds3tae.dll` into `validator\bin\…`; building needs the .NET 10 SDK, running
+it needs only the runtime. The same assembly is committed in `tools\` as `ds3tae.dll` with its `.deps.json` and
+`.runtimeconfig.json`, next to the `SoulsFormats.dll` it links, so `dotnet ds3tae.dll` works without building anything.
 
 ### Patched models
 
