@@ -1,4 +1,4 @@
-// ds3tae - character-model and TAE patch tool for HideSheathedLeft.
+// ds3tae - character-model and TAE patch tool for hidestowed.
 // Build: dotnet build validator/validator.csproj
 
 using System;

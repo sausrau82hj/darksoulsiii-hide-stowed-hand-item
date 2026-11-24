@@ -1,5 +1,5 @@
-// xinput1_3.dll - loader shell for HideSheathedLeft.
-// Forwards every system XInput export, then loads HideSheathedLeft.dll.
+// xinput1_3.dll - loader shell for hidestowed.
+// Forwards every system XInput export, then loads hidestowed.dll.
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -109,12 +109,12 @@ DWORD WINAPI DelayedLoadWithSleep(LPVOID param) {
 void Boot(HMODULE mod) {
     const int loadCore = GetPrivateProfileIntW(L"loader", L"LoadCore", 1, g_ini.c_str());
     if (loadCore) {
-        const std::wstring core = g_dir + L"\\HideSheathedLeft.dll";
+        const std::wstring core = g_dir + L"\\hidestowed.dll";
         if (GetFileAttributesW(core.c_str()) == INVALID_FILE_ATTRIBUTES) {
-            LogLine(L"core HideSheathedLeft.dll -- not present, skipped");
+            LogLine(L"core hidestowed.dll -- not present, skipped");
         } else {
             HMODULE h = LoadLibraryW(core.c_str());
-            LogLine(L"core HideSheathedLeft.dll -- %s (handle=0x%p)",
+            LogLine(L"core hidestowed.dll -- %s (handle=0x%p)",
                     h ? L"loaded" : L"FAILED", (void*)h);
         }
     } else {
@@ -144,7 +144,7 @@ extern "C" BOOL APIENTRY DllMain(HMODULE mod, DWORD reason, LPVOID) {
     if (reason == DLL_PROCESS_ATTACH) {
         DisableThreadLibraryCalls(mod);
         g_dir = SelfDir(mod);
-        g_ini = g_dir + L"\\HideSheathedLeft.ini";
+        g_ini = g_dir + L"\\hidestowed.ini";
         LoadReal();
         LogLine(L"--- mod loader shell attached (pid %lu) ---", GetCurrentProcessId());
         Boot(mod);

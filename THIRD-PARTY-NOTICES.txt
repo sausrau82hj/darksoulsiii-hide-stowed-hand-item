@@ -15,7 +15,7 @@ components below are used by, shipped with, or referenced from this repository.
     License: GNU General Public License v3.0
 
 Linked by ds3tae (validator/ and tools/ds3tae.*), which is therefore distributed under
-GPL-3.0 as well; see validator/LICENSE. The mod DLLs (src/HideSheathedLeft.cpp,
+GPL-3.0 as well; see validator/LICENSE. The mod DLLs (src/hidestowed.cpp,
 src/xinput1_3_proxy.cpp) do not link or include SoulsFormats and stay under the MIT
 license in LICENSE.
 

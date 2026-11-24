@@ -1,4 +1,4 @@
-// HideSheathedLeft - Dark Souls III 1.15.0 (Steam, 64-bit).
+// hidestowed - Dark Souls III 1.15.0 (Steam, 64-bit).
 // Points the WepAbsorpPosParam sheathed and off-hand model fields at a parking dummy.
 
 #define WIN32_LEAN_AND_MEAN
@@ -751,9 +751,9 @@ BOOL APIENTRY DllMain(HMODULE mod, DWORD reason, LPVOID) {
         DisableThreadLibraryCalls(mod);
         g_exeBase = (uint64_t)GetModuleHandleW(nullptr);
         const std::wstring dir = ModuleDir(mod);
-        g_iniPath = dir + L"\\HideSheathedLeft.ini";
+        g_iniPath = dir + L"\\hidestowed.ini";
         LoadConfig();
-        Log("--- HideSheathedLeft %s loaded (pid %lu) ---", kVersion, GetCurrentProcessId());
+        Log("--- hidestowed %s loaded (pid %lu) ---", kVersion, GetCurrentProcessId());
         if (HANDLE th = CreateThread(nullptr, 0, Worker, nullptr, 0, nullptr)) {
             CloseHandle(th);
         }

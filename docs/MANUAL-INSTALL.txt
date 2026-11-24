@@ -10,8 +10,8 @@ Default game folder, written <game> below:
     D:\Steam\steamapps\common\DARK SOULS III\Game
 
 Where things are in THIS package
-    HideSheathedLeft.dll      ->  <game>\HideSheathedLeft.dll
-    HideSheathedLeft.ini      ->  <game>\HideSheathedLeft.ini
+    hidestowed.dll            ->  <game>\hidestowed.dll
+    hidestowed.ini            ->  <game>\hidestowed.ini
     xinput1_3.dll             ->  <game>\xinput1_3.dll
     docs\MANUAL-INSTALL.txt       this file
 
@@ -20,9 +20,11 @@ Where things are in THIS package
     shipping a pre-patched model, so no game assets live in this package.
 
     The patcher, ds3tae, is NOT in this archive: Nexus uploads may not contain
-    executables.  Download ds3tae.zip from the GitHub releases page, unpack it
-    somewhere (it needs the .NET 10 runtime) and run dotnet ds3tae.dll from there; the
-    commands below assume it is on your PATH or in the current folder.
+    executables.  Take ds3tae.dll, ds3tae.deps.json, ds3tae.runtimeconfig.json
+    and SoulsFormats.dll out of the tools\ folder of the GitHub repository (or
+    build it from validator\, see the README), put them in one folder and run
+    dotnet ds3tae.dll from there (it needs the .NET 10 runtime); the commands
+    below assume it is on your PATH or in the current folder.
 
 --------------------------------------------------------------------------
 0. Back up first (copy these somewhere safe)
@@ -36,8 +38,8 @@ Where things are in THIS package
 --------------------------------------------------------------------------
 1. Copy the mod core and its configuration
 --------------------------------------------------------------------------
-    HideSheathedLeft.dll  ->  <game>\HideSheathedLeft.dll      (~191 KB)
-    HideSheathedLeft.ini  ->  <game>\HideSheathedLeft.ini
+    hidestowed.dll  ->  <game>\hidestowed.dll      (~191 KB)
+    hidestowed.ini  ->  <game>\hidestowed.ini
 
     The ini ships with usable defaults; the README documents every key.
     The ones that matter for daily use:
@@ -58,13 +60,13 @@ Where things are in THIS package
 --------------------------------------------------------------------------
     xinput1_3.dll  ->  <game>\xinput1_3.dll                    (~193 KB)
 
-    Its only job is to make the game load HideSheathedLeft.dll: it poses as
+    Its only job is to make the game load hidestowed.dll: it poses as
     xinput1_3 and forwards the XInput exports to the system DLL, so controllers
     are unaffected.
 
     * If another mod already owns <game>\xinput1_3.dll (a key-prompt mod, a DKP
       loader, ...), overwriting it disables that mod.  Either rename that file
-      first or load HideSheathedLeft.dll with ModEngine instead — then skip
+      first or load hidestowed.dll with ModEngine instead — then skip
       this step.
     * Only one xinput1_3.dll can be active at a time.
 
@@ -109,7 +111,7 @@ Where things are in THIS package
         back.
 
     Nothing happens at all: make sure HideLeftHang=1 and both
-    HideSheathedLeft.dll and xinput1_3.dll sit directly in <game>.
+    hidestowed.dll and xinput1_3.dll sit directly in <game>.
 
 --------------------------------------------------------------------------
 5. If it stutters
@@ -130,7 +132,7 @@ Where things are in THIS package
         set HideLeftHang=0 and HideRightHang=0 in the ini (applies in ~1 s)
 
     Back to vanilla, by hand:
-        a) delete <game>\HideSheathedLeft.dll and <game>\HideSheathedLeft.ini;
+        a) delete <game>\hidestowed.dll and <game>\hidestowed.ini;
         b) put your backed-up xinput1_3.dll back (or delete the file if you had
            no other loader);
         c) put the character models back from your own copies (step 0).
