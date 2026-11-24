@@ -25,20 +25,15 @@ Make a `chr` folder with the patched models — from the models pack, or patched
   point the loader at it: [me](https://www.nexusmods.com/darksouls3/mods/2410),
   [me2](https://github.com/soulsmods/ModEngine2) or [me3](https://github.com/garyttierney/me3). `xinput1_3.dll` is
   not needed here: the loader injects `hidestowed.dll` itself.
-- **The loader only overrides files** — it can serve the `chr` folder but cannot inject a DLL. Then the core is loaded
-  by the shell: copy `hidestowed.dll`, `hidestowed.ini` and `xinput1_3.dll` into the game folder, and point the
-  loader at the `chr` folder.
-
-`xinput1_3.dll` stands in for the system XInput library: the game loads it from its own folder, it forwards every
-XInput call to the real DLL — controllers keep working — and then loads `hidestowed.dll`. Anywhere else it is never
-loaded, and only one `xinput1_3.dll` fits in a folder, so rename another mod's copy first if there is one.
+- **The loader only loads the `chr` files** — then the core is loaded by the shell: copy `hidestowed.dll`,
+  `hidestowed.ini` and `xinput1_3.dll` into the game folder, and point the loader at the `chr` folder.
 
 Without a loader, those same three files go into the game folder and the patched models into `Game\chr`.
 
 ## Uninstall
 
 - Remove the mod folder from the loader profile — or, on the game-folder route, delete `hidestowed.dll`,
-  `hidestowed.ini` and `xinput1_3.dll`, and put your own `xinput1_3.dll` back.
+  `hidestowed.ini` and `xinput1_3.dll`.
 - Models left patched — strip the dummies instead: `dotnet ds3tae.dll stripdir "<chr>" INPLACE "382,383" "chrbnd"`.
   A stripped bundle is not byte-identical (the DCX is re-compressed); `verify` ending in `verify: CLEAN` is what
   proves it either way.
