@@ -51,6 +51,26 @@ changes and the game needs no unpacking.
 2. Point the loader at that folder: [me](https://www.nexusmods.com/darksouls3/mods/2410),
    [me2](https://github.com/soulsmods/ModEngine2) or [me3](https://github.com/garyttierney/me3).
 
+### Repairing the models
+
+Both routes need dummies 382 and 383 in every `chr` bundle. A bundle missing them draws black triangles or flicker on
+that character, and that is what another model mod, a partial `chr` restore or a file copied from an old backup leaves
+behind. The patcher is part of this repository: `tools\` carries the same `ds3tae` build as
+`ds3-hshi-ds3tae-v1.0.0.zip`, so a clone needs no download. It needs the .NET 10 **runtime** (not the SDK); from the
+repository root:
+
+```
+tools\ds3tae.exe verify  "<chr>" chrbnd "382,383"                           which bundles carry them
+tools\ds3tae.exe parkdir "<chr>" INPLACE "382,383" "0,-1000,0" 0 "chrbnd"   put them back
+tools\ds3tae.exe verify  "<chr>" chrbnd "382,383"                           scanned N, carrying N
+```
+
+`verify` names every bundle that carries the dummies (`HIT <file>`) and ends in `files still carrying 382,383: N`;
+when `N` equals `scanned N file(s)` the models are good, and both numbers must match after a repair. `parkdir`
+appends the dummies only to the bundles that lack them, so it is safe on the whole folder and safe to run twice, and
+`DRYRUN` as the last argument only reports. `dotnet tools\ds3tae.dll` works in place of the exe; `stripdir` is the
+inverse (see Uninstall).
+
 ## Uninstall
 
 - **Route 2** — remove the mod folder from the loader profile.
@@ -129,8 +149,9 @@ cl /nologo /O2 /EHsc /std:c++17 /DNDEBUG /LD src\xinput1_3_proxy.cpp /Fe:xinput1
 dotnet build validator\validator.csproj
 ```
 
-`dotnet build` writes `ds3tae.exe` and `ds3tae.dll` into `validator\bin\…`; nothing built is committed, and the
-release asset `ds3-hshi-ds3tae-v1.0.0.zip` carries the assembly for people who do not want to build it.
+`dotnet build` writes `ds3tae.exe` and `ds3tae.dll` into `validator\bin\…`. The committed `tools\ds3tae.*` is the
+build that ships as `ds3-hshi-ds3tae-v1.0.0.zip`, so a rebuild means copying the output over it — otherwise the
+repository tool and the release asset drift apart.
 
 ## Repository layout
 
@@ -139,6 +160,7 @@ HideSheathedLeft.dll / .ini   mod core and its configuration
 xinput1_3.dll                 loader shell (forwards the system XInput)
 src\                          C++ sources of both DLLs
 validator\                    C# source of ds3tae (patch / verify / strip) + its GPL-3.0 text
+tools\ds3tae.exe / .dll       the patcher, built from validator\ — same build as the release asset
 tools\SoulsFormats.dll        the reference the validator build needs
 docs\MANUAL-INSTALL.txt       longer walkthrough with troubleshooting
 LICENSE, THIRD-PARTY-NOTICES  licenses, and what is not MIT
