@@ -13,16 +13,18 @@ read models that carry them.
 
 | Release asset | Contents |
 |---|---|
-| `ds3-hshi-v1.0.0.zip` | `hidestowed.dll`, `hidestowed.ini`, `xinput1_3.dll`, `LICENSE`, `THIRD-PARTY-NOTICES.txt` — 185 KB |
-| `ds3-hshi-chr-models-v1.0.0.zip` | 165 patched `chr\*.chrbnd.dcx` — 342 MB |
+| [`ds3-hshi-v1.0.0.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.0/ds3-hshi-v1.0.0.zip) | `hidestowed.dll`, `hidestowed.ini`, `xinput1_3.dll`, `LICENSE`, `THIRD-PARTY-NOTICES.txt` — 185 KB |
+| [`ds3-hshi-chr-models-v1.0.0.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.0/ds3-hshi-chr-models-v1.0.0.zip) | 165 patched `chr\*.chrbnd.dcx` — 342 MB |
 
 ## Requirements
 
-- Dark Souls III on Steam, patch **1.15.0**, 64-bit. The offsets are 1.15.0's and nothing checks the version at run
-  time, so a newer patch means a mod that does nothing rather than an error message.
+- [Dark Souls III](https://store.steampowered.com/app/374320/) on Steam, patch **1.15.0**, 64-bit. The offsets are
+  1.15.0's and nothing checks the version at run time, so a newer patch means a mod that does nothing rather than an
+  error message.
 - Windows 10/11 x64. Both DLLs are native PE32+ and import only `KERNEL32.dll`: no Visual C++ redistributable, no
   .NET, no admin rights, no network, no files written.
-- `.NET 10 runtime`, 64-bit, only for `ds3tae` (patching your own models). The prepared models pack needs no tool.
+- [.NET 10 runtime](https://dotnet.microsoft.com/download/dotnet/10.0), 64-bit, only for `ds3tae` (patching your own
+  models). The prepared models pack needs no tool.
 - A mod loader is optional; without one the `xinput1_3.dll` shell loads the core — see Install.
 
 ## Install
@@ -106,11 +108,13 @@ it needs only the runtime. The same assembly is committed in `tools\` as `ds3tae
 Both ways end with a `chr` folder whose `*.chrbnd.dcx` all carry dummies 382 and 383.
 
 The bundles are not loose files — they sit inside `Data1-5` — so patching your own models means unpacking the game
-first, with UXM or [Nuxe](https://github.com/JKAnderson/Nuxe) (its successor). Nothing else reaches the
+first, with [UXM](https://github.com/Nordgaren/UXM-Selective-Unpack) or
+[Nuxe](https://github.com/JKAnderson/Nuxe) (its successor). Nothing else reaches the
 `chrbnd.dcx` files; a loader only serves the folder once it exists.
 
-- **Prepared pack** — download `ds3-hshi-chr-models-v1.0.0.zip` and use its `chr` folder; no unpacking, the pack is
-  drop-in.
+- **Prepared pack** — download
+  [`ds3-hshi-chr-models-v1.0.0.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.0/ds3-hshi-chr-models-v1.0.0.zip)
+  and use its `chr` folder; no unpacking, the pack is drop-in.
 - **Your own models** — unpack the game, then copy `ds3tae.dll`, `ds3tae.deps.json`, `ds3tae.runtimeconfig.json` and
   `SoulsFormats.dll` out of `tools\` (or build them as above) and run:
 
