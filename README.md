@@ -13,7 +13,7 @@ read models that carry them.
 
 | Release asset | Contents |
 |---|---|
-| `ds3-hshi-v1.0.0.zip` | `hidestowed.dll`, `hidestowed.ini`, docs — 196 KB |
+| `ds3-hshi-v1.0.0.zip` | `hidestowed.dll`, `hidestowed.ini`, docs — 194 KB |
 | `ds3-hshi-chr-models-v1.0.0.zip` | 165 patched `chr\*.chrbnd.dcx` — 342 MB |
 
 ## Install
