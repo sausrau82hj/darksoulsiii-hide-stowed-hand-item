@@ -9,3 +9,6 @@ bin/
 *.obj
 *.lib
 *.exp
+
+# no executables in the repository
+tools/ds3tae.exe
