@@ -13,7 +13,7 @@ read models that carry them.
 
 | Release asset | Contents |
 |---|---|
-| `ds3-hshi-v1.0.0.zip` | `hidestowed.dll`, `hidestowed.ini`, docs — 194 KB |
+| `ds3-hshi-v1.0.0.zip` | `hidestowed.dll`, `hidestowed.ini`, `xinput1_3.dll`, `LICENSE`, `THIRD-PARTY-NOTICES.txt` — 198 KB |
 | `ds3-hshi-chr-models-v1.0.0.zip` | 165 patched `chr\*.chrbnd.dcx` — 342 MB |
 
 ## Install
@@ -57,7 +57,7 @@ Without a loader, those same three files go into the game folder and the patched
 | `HidePoly` | `382` | parking dummy id (`383` spare) |
 | `Probe` | `0` | `1` = observation only, writes nothing to the game |
 | `ProbeAll` | `0` | `1` = probe every write it sees instead of stopping at the first |
-| `ProbeLimit` | `2000` | how many probe hits to collect |
+| `ProbeLimit` | `500` | how many probe hits to collect |
 | `ProbeRearmMs` | `100` | delay before the probe arms again |
 | `ScanMapped` | `0` | `1` = also consider MEM_MAPPED regions during the scan |
 | `WorldChrManOffset` | `0x4768E78` | `WorldChrMan` offset, only used by the probe path |
@@ -122,13 +122,12 @@ src\                          C++ sources of both DLLs
 validator\                    C# source of ds3tae (patch / verify / strip) + its GPL-3.0 text
 tools\ds3tae.dll + .deps.json  the patcher assembly, run it with `dotnet`
 tools\SoulsFormats.dll        the reference the validator build needs
-docs\MANUAL-INSTALL.txt       longer walkthrough with troubleshooting
 LICENSE, THIRD-PARTY-NOTICES  licenses, and what is not MIT
 ```
 
 ## License
 
-- Mod DLLs, `src\`, `docs\` and this README: MIT — see [`LICENSE`](LICENSE).
+- Mod DLLs, `src\` and this README: MIT — see [`LICENSE`](LICENSE).
 - `validator\` and `tools\ds3tae.*`: GPL-3.0 — see [`validator/LICENSE`](validator/LICENSE). `ds3tae` links
   [SoulsFormats](https://github.com/JKAnderson/SoulsFormats), which is GPL-3.0.
 - The models pack contains modified FromSoftware assets, single-player use only. Details in
