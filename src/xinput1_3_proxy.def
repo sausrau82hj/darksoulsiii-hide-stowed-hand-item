@@ -1,6 +1,6 @@
 LIBRARY xinput1_3
 
-; Export table mirrored from the system xinput1_3.dll (ordinal / name pairs)
+; The 8 named exports, plus the four undocumented entries the system DLL keeps at 100-103.
 EXPORTS
     DllMain=ProxyDllMainEntry @1
     XInputGetState @2
@@ -10,3 +10,7 @@ EXPORTS
     XInputGetDSoundAudioDeviceGuids @6
     XInputGetBatteryInformation @7
     XInputGetKeystroke @8
+    XInputGetStateEx @100 NONAME
+    XInputWaitForGuideButton @101 NONAME
+    XInputCancelGuideButtonWait @102 NONAME
+    XInputPowerOffController @103 NONAME

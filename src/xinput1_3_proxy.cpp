@@ -45,6 +45,11 @@ FARPROC Real(const char* name) {
     return g_real ? GetProcAddress(g_real, name) : nullptr;
 }
 
+FARPROC RealOrdinal(int ordinal) {
+    if (!g_real) LoadReal();
+    return g_real ? GetProcAddress(g_real, MAKEINTRESOURCEA(ordinal)) : nullptr;
+}
+
 std::wstring Trim(const std::wstring& s) {
     const size_t b = s.find_first_not_of(L" \t\r\n");
     if (b == std::wstring::npos) return L"";
@@ -133,6 +138,7 @@ void Boot(HMODULE mod) {
     }
 }
 
+typedef DWORD(WINAPI* Fn1)(DWORD);
 typedef DWORD(WINAPI* Fn2)(DWORD, void*);
 typedef DWORD(WINAPI* Fn3)(DWORD, void*, void*);
 typedef DWORD(WINAPI* Fn3d)(DWORD, DWORD, void*);
@@ -187,4 +193,24 @@ extern "C" DWORD WINAPI XInputGetBatteryInformation(DWORD index, BYTE devType, v
 extern "C" DWORD WINAPI XInputGetKeystroke(DWORD index, DWORD reserved, void* keystroke) {
     const FARPROC p = Real("XInputGetKeystroke");
     return p ? ((Fn3d)p)(index, reserved, keystroke) : ERROR_DEVICE_NOT_CONNECTED;
+}
+
+extern "C" DWORD WINAPI XInputGetStateEx(DWORD index, void* state) {
+    const FARPROC p = RealOrdinal(100);
+    return p ? ((Fn2)p)(index, state) : ERROR_DEVICE_NOT_CONNECTED;
+}
+
+extern "C" DWORD WINAPI XInputWaitForGuideButton(DWORD index, DWORD flag, void* unused) {
+    const FARPROC p = RealOrdinal(101);
+    return p ? ((Fn3d)p)(index, flag, unused) : ERROR_DEVICE_NOT_CONNECTED;
+}
+
+extern "C" DWORD WINAPI XInputCancelGuideButtonWait(DWORD index) {
+    const FARPROC p = RealOrdinal(102);
+    return p ? ((Fn1)p)(index) : ERROR_DEVICE_NOT_CONNECTED;
+}
+
+extern "C" DWORD WINAPI XInputPowerOffController(DWORD index) {
+    const FARPROC p = RealOrdinal(103);
+    return p ? ((Fn1)p)(index) : ERROR_DEVICE_NOT_CONNECTED;
 }

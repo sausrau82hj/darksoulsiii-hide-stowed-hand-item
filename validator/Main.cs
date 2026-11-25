@@ -442,8 +442,8 @@ internal static class Program
                     continue;
                 }
 
-                string outPath = inPlace ? f : Path.Combine(outRoot, Path.GetFileName(f));
-                if (!inPlace) Directory.CreateDirectory(outRoot);
+                string outPath = inPlace ? f : Path.Combine(outRoot, Path.GetRelativePath(root, f));
+                if (!inPlace) Directory.CreateDirectory(Path.GetDirectoryName(outPath));
                 File.WriteAllBytes(outPath, outBytes);
                 cleaned++;
                 removedTotal += gone;
@@ -573,8 +573,8 @@ internal static class Program
                     continue;
                 }
 
-                string outPath = inPlace ? f : Path.Combine(outRoot, Path.GetFileName(f));
-                if (!inPlace) Directory.CreateDirectory(outRoot);
+                string outPath = inPlace ? f : Path.Combine(outRoot, Path.GetRelativePath(root, f));
+                if (!inPlace) Directory.CreateDirectory(Path.GetDirectoryName(outPath));
                 File.WriteAllBytes(outPath, outBytes);
                 patched++;
                 appended += missing.Length;
@@ -643,7 +643,7 @@ internal static class Program
                               + " original state and not a leftover; a fresh install has none.");
         }
 
-        return unreadable == 0 ? 0 : 1;
+        return (unreadable == 0 && hits == 0) ? 0 : 1;
     }
 
     private static int Dummies(string path)

@@ -13,8 +13,8 @@ read models that carry them.
 
 | Release asset | Contents |
 |---|---|
-| [`ds3-hshi-v1.0.0.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.0/ds3-hshi-v1.0.0.zip) | `hidestowed.dll`, `hidestowed.ini`, `xinput1_3.dll`, `LICENSE`, `THIRD-PARTY-NOTICES.txt` — 185 KB |
-| [`ds3-hshi-chr-models-v1.0.0.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.0/ds3-hshi-chr-models-v1.0.0.zip) | 165 patched `chr\*.chrbnd.dcx` — 342 MB |
+| [`ds3-hshi-v1.0.1.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.1/ds3-hshi-v1.0.1.zip) | `hidestowed.dll`, `hidestowed.ini`, `xinput1_3.dll`, `LICENSE`, `THIRD-PARTY-NOTICES.txt` — 185 KB |
+| [`ds3-hshi-chr-models-v1.0.1.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.1/ds3-hshi-chr-models-v1.0.1.zip) | 165 patched `chr\*.chrbnd.dcx` — 341 MB |
 
 ## Requirements
 
@@ -108,7 +108,7 @@ first, with [UXM](https://github.com/Nordgaren/UXM-Selective-Unpack) or
 `chrbnd.dcx` files; a loader only serves the folder once it exists.
 
 - **Prepared pack** — download
-  [`ds3-hshi-chr-models-v1.0.0.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.0/ds3-hshi-chr-models-v1.0.0.zip)
+  [`ds3-hshi-chr-models-v1.0.1.zip`](https://github.com/sausrau82hj/darksoulsiii-hide-stowed-hand-item/releases/download/1.0.1/ds3-hshi-chr-models-v1.0.1.zip)
   and use its `chr` folder; no unpacking, the pack is drop-in.
 - **Your own models** — unpack the game, then copy `ds3tae.dll`, `ds3tae.deps.json`, `ds3tae.runtimeconfig.json` and
   `SoulsFormats.dll` out of `tools\` (or build them as above) and run:

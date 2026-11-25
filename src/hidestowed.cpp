@@ -14,7 +14,7 @@
 
 namespace {
 
-constexpr char     kVersion[]     = "1.0.5";
+constexpr char     kVersion[]     = "1.0.1";
 constexpr char     kParamName[]   = "WEP_ABSORP_POS_PARAM_ST";
 constexpr uint64_t kLengthOff     = 0x0A;
 constexpr uint64_t kNameOffsetOff = 0x10;
@@ -88,6 +88,15 @@ bool         g_loggedConfig = false;
 bool SafeCopy(void* dst, const void* src, size_t n) {
     __try {
         memcpy(dst, src, n);
+        return true;
+    } __except (EXCEPTION_EXECUTE_HANDLER) {
+        return false;
+    }
+}
+
+bool SafeStore16(void* dst, uint16_t v) {
+    __try {
+        *(uint16_t*)dst = v;
         return true;
     } __except (EXCEPTION_EXECUTE_HANDLER) {
         return false;
@@ -276,11 +285,13 @@ int ApplyTable(TableState& st, int* writesOut) {
             const uint16_t park = (g_cfg.hidePoly < 0)
                                       ? kInvalidPoly
                                       : (uint16_t)(int16_t)g_cfg.hidePoly;
-            const uint16_t target = enabled ? park
-                                            : st.orig[(size_t)i * kFieldCount + f];
             uint16_t cur = 0;
-            if (SafeCopy(&cur, p + kFieldOff[f], 2) && cur == target) continue;
-            *(uint16_t*)(p + kFieldOff[f]) = target;
+            if (!SafeCopy(&cur, p + kFieldOff[f], 2)) continue;
+            uint16_t& orig = st.orig[(size_t)i * kFieldCount + f];
+            if (cur != park && cur != orig) orig = cur;
+            const uint16_t target = enabled ? park : orig;
+            if (cur == target) continue;
+            if (!SafeStore16(p + kFieldOff[f], target)) continue;
             ++writes;
         }
         ++rows;
