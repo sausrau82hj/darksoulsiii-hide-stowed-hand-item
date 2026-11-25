@@ -1,7 +1,7 @@
 THIRD-PARTY NOTICES
 ===================
 
-Hide Stowed Hand Item (c) 2026 xiangchi7.
+Hide Stowed Hand Item (c) 2026 sausrau82hj.
 
 The mod DLLs contain no third-party code. The optional models pack redistributes modified
 FromSoftware character models; ds3tae edits the game files the user already owns. The
